@@ -1,0 +1,83 @@
+﻿@using PetShopProject.Models;
+@model PetShopProject.Models.Animal
+
+<div class="myText">
+
+    <div class="page-header">
+        <h1>Edit</h1>
+    </div>
+    <hr />
+
+    <div class="myRow">
+        <div class="col bg-transparent"></div>
+        <div class="col wrapDetails">
+            <div>
+                <div class="page-header details">
+                    <h1>Animal: @Model.Name</h1>
+                </div>
+
+                <br />
+                <br />
+                <br />
+                <br />
+                <form asp-action="DetailsChanged" enctype="multipart/form-data">
+                    <div class="row myCenteredPic bg-transparent">
+                        <div class="col"></div>
+                        <div class="col">
+                            <img class="img-thumbnail myCenteredPic" id="preview" width="200" src="/Assets/AnimalPictures/@ViewBag.PicPath" />
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="details">
+                        <input class="file" type="file" asp-for="Picture" onchange="showPreview(event)" required />
+                    </div>
+                    <div class="details">
+                        <div>
+                            <div>
+                                Name:
+                            </div>
+                            <div>
+                                <input type="text" asp-for="Name" /><span asp-validation-for="Name" class="required"></span>
+                            </div>
+                        </div>
+                        <div >
+                            <div >
+                                Age:
+                            </div>
+                            <div>
+                                <input type="text" asp-for="Age" /><span asp-validation-for="Age" class="required"></span>
+                            </div>
+                        </div>
+                        <div >
+                            <div>
+                                Description:
+                            </div>
+                            <div>
+                                <textarea rows="10" asp-for="Description"></textarea><span asp-validation-for="Description" class="required"></span>
+                            </div>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+                        <br />
+                        <div class="container details">
+                            <div class="row bg-transparent">
+
+                                @foreach (var comment in Model.Comments!)
+                                {
+                                    <div class="row bg-transparent">
+                                        <div class="col">@comment.Text</div>
+                                        <div> <a asp-action="Profile" asp-controller="User" asp-route-Name="@comment.UserName">@comment.UserName</a></div>
+                                        <div class="col"><a asp-action="DeleteComment" asp-route-id="@comment.Id" class="btn btn-danger">delete</a></div>
+                                        <hr />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-primary"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col bg-transparent"></div>
+    </div>
+</div>

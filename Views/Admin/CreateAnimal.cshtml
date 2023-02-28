@@ -1,0 +1,70 @@
+﻿@using PetShopProject.Models;
+@model PetShopProject.Models.Animal
+
+@{
+    var categories = ViewBag.Categories as IEnumerable<Category>;
+}
+<div class="myText">
+<div class="page-header">
+    <h1>Create</h1>
+</div>
+<hr />
+
+
+    <div class="page-header myText">
+        <h1>Add New Animal</h1>
+    </div>
+
+    <form asp-action="CreateAnimal" enctype="multipart/form-data">
+        <div class="row bg-transparent">
+            <div class="col">Picture: </div>
+            <div class="col">
+                <img class="img-thumbnail" id="preview" width="200" src="" />
+                <br />
+                <input class="file" type="file" asp-for="Picture" onchange="showPreview(event)" required />
+            </div>
+        </div>
+
+
+        <div class="row bg-transparent">
+            <div class="col">Name:</div>
+            <div class="col"><input type="text" asp-for="Name" /><span asp-validation-for="Name" class="required"></span></div>
+        </div>
+
+        <div class="row bg-transparent">
+            <div class="col">Age:</div>
+            <div class="col"><input type="number" asp-for="Age" /><span asp-validation-for="Age" class="required"></span></div>
+        </div>
+
+        <div class="row bg-transparent">
+            <div class="col">Category:</div>
+            <div class="col">
+                <div class="select">
+                    <select asp-for="CategoryId">
+                        <option></option>
+                        @foreach (var category in categories!)
+                        {
+                            <option value="@category.Id">@category.CategoryName</option>
+                        }
+                    </select>
+
+                    <span asp-validation-for="Id" class="required"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row bg-transparent">
+            <div class="col">Description:</div>
+            <div class="col"><input type="text" asp-for="Description" /><span asp-validation-for="Description" class="required"></span></div>
+        </div>
+        <input type="hidden" asp-for="ImagePath" value="@ViewBag.PicPath" />
+
+        <div class="row bg-transparent">
+            <div class="col"></div>
+            <div class="col"><input type="submit" value="Add" class="btn btn-primary"></div>
+            <div class="col"></div>
+
+        </div>
+    </form>
+</div>

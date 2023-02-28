@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {},
+  "dependencies": {
+    "bootstrap": "5.2.3",
+    "jquery": "3.6.3",
+    "jquery-validation-unobtrusive": "4.0.0",
+    "popper": "1.0.1"
+  }
+}

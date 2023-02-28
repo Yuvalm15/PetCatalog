@@ -1,0 +1,11 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PetShopProject.Models
+{
+    public class Category
+    {
+        public int Id { get; set; }
+        public string? CategoryName { get; set; }
+        public IEnumerable<Animal>? Animals { get; set; }
+    }
+}

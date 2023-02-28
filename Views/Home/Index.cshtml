@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PetShopProject.Models.Animal>;
+<div class="myText">
+    <div class="page-header home">
+        <h1>Home Page</h1>
+    </div>
+    <hr />
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">Picture</div>
+            <div class="col">Name</div>
+            <div class="col">Description</div>
+        </div>
+        @foreach (var animal in Model)
+        {
+
+            <div class="row myStripedView">
+
+                <div class="col"><img src="/Assets/AnimalPictures/@animal.ImagePath" width="120" height="100" /></div>
+                <div class="col"><a asp-action="ShowAnimal" asp-route-Id=@animal.Id>@animal.Name</a></div>
+                <div class="col">@animal.Description</div>
+            </div>
+        }
+    </div>
+</div>

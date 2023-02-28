@@ -1,0 +1,71 @@
+﻿@using PetShopProject.Models;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/scripts/bootstrap.js"></script>
+    <script src="~/scripts/bootstrap.bundle.js"></script>
+    <script src="~/scripts/jquery.js"></script>
+    <script src="~/scripts/jquery.validate.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/scripts/myscripts.js"></script>
+    <link href="~/styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/styles/Stylesheet.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 nav-tabs">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Home"><img class="logo" src="~/Assets/BackGroundPictures/logo.jpg"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-action="Catalog" asp-controller="Home">Catalog</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu">
+                            @if (!User.Identity!.IsAuthenticated)
+                            {
+                                <li><a class="dropdown-item" asp-action="LogIn" asp-controller="Account">Log In</a></li>
+                            }
+                            @if (User.Identity!.IsAuthenticated)
+                            {
+                                <li><a class="dropdown-item" asp-action="Profile" asp-controller="User" asp-route-Name="@User.Identity.Name">My Profile</a></li>
+                                <li><a class="dropdown-item"  asp-action="Logout" asp-controller="Account">Log out</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        @if (User.IsInRole("Administrators"))
+                        {
+                            <a class="nav-link" asp-action="AdminView" asp-controller="Admin">Admin</a>
+                        }
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <img class="icon" src="@User.GetIconPath()" >
+                        <span>
+                            Welcome 
+                            <br>
+                            @User.Identity.Name;
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        
+        @RenderBody()
+    </div>
+</body>
+</html>

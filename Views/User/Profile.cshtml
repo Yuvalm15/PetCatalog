@@ -1,0 +1,49 @@
+﻿@using PetShopProject.Models
+@model PetShopProject.Models.UserModel
+
+@{
+    var animals = ViewBag.Animals as IEnumerable<Animal>;
+}
+<div class="myText">
+
+    <div class="page-header">
+        <h1>Profile for: @Model.UserName</h1>
+        <img class="d-flex" src=@Model.IconImageUrl width="250" height="250" />
+    </div>
+    <hr />
+    <h3>User joined at : @Model.CreatedAt</h3>
+    <div class="container">
+        @foreach (var comment in ViewBag.Comments)
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        Text
+                    </div>
+                    <div class="col">
+                        Date
+                    </div>
+                    <div class="col">
+                        Animal
+                    </div>
+                </div>
+                <div class="row myStripedView">
+                    <div class="col">
+                        @comment.Text
+                    </div>
+                    <div class="col">
+                        @comment.CreatedAt
+                    </div>
+                    <div class="col">
+                        <a asp-action="ShowAnimal" asp-controller="Home" asp-route-Id="@comment.AnimalId"><img width="50" height="50" src="/Assets/AnimalPictures/@animals?.FirstOrDefault(x => x.Id == comment.AnimalId)?.ImagePath"></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr />
+        }
+    </div>
+</div>
+
+

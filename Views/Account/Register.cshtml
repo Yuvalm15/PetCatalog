@@ -1,0 +1,59 @@
+﻿@model PetShopProject.Models.RegisterModel
+<div class="myText">
+
+    <div class="page-header">
+        <h1>Register</h1>
+    </div>
+    <hr />
+
+    <div class="container">
+        <br />
+        <form method="post" asp-action="RegisterConfirmed">
+            <div>
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" value="@ViewBag.Name" />
+                <span asp-validation-for="Username"></span>
+            </div>
+            <div>
+                <label asp-for="Password">Password</label>
+                <input type="password" asp-for="Password" value="@ViewBag.Pass" />
+                <span asp-validation-for="Password"></span>
+                <br />
+                <span>@ViewBag.ErrorMessage</span>
+                <br />
+
+                <input class="formPic" type="hidden" asp-for="IconImageUrl" value="@ViewBag.Picture" />
+            </div>
+            <div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </a>
+                    <ul class="dropdown-menu IconList">
+                        <li><img src="/Assets/UserPictures/Default.jpg" width="100" height="100" /></li>
+                        <li><img src="/Assets/UserPictures/Bird.png" width="100" height="100" /></li>
+                        <li><img src="/Assets/UserPictures/Fish.jpg" width="100" height="100" /></li>
+                        <li><img src="/Assets/UserPictures/Frog.jpg" width="100" height="100" /></li>
+                        <li><img src="/Assets/UserPictures/Panda.png" width="100" height="100" /></li>
+                        <li><img src="/Assets/UserPictures/Shark.jpg" width="100" height="100" /></li>
+                        <li><img src="/Assets/UserPictures/Tiger.jpg" width="100" height="100" /></li>
+                    </ul>
+                </div>
+            </div>
+            <img class="Prev" src="@ViewBag.Picture" width="250" height="250" />
+            <div>
+                <input type="submit" value="Register" />
+            </div>
+            <div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(".IconList li").click(function () {
+        let pic = $(this).find("img").attr("src")
+        $(".Prev").attr("src", pic)
+        $(".formPic").val(pic)
+    })
+</script>

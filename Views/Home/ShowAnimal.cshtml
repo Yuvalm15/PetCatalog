@@ -1,0 +1,46 @@
+﻿@using PetShopProject.Models
+@model PetShopProject.Models.Animal
+<div class="myText">
+
+    <div class="container">
+        <h1>Name: @Model.Name</h1>
+        <img src="/Assets/AnimalPictures/@Model.ImagePath" width="250" height="250" />
+        <div>
+            Age: @Model.Age
+        </div>
+        <div>
+            Category: @ViewBag.Category.CategoryName
+        </div>
+        <div>
+            Description :
+            @Model.Description
+        </div>
+    </div>
+
+
+    <br />
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <partial name="_CommentsSectionView" model="new Comment {AnimalId = Model.Id}"></partial>
+    }
+
+    @foreach (var comment in Model.Comments!)
+    {
+        <div class="container">
+            <div class="col">
+                <img src="@comment.UserIcon" width="50" height="50" />
+            </div>
+            <div class="col">
+                <h6>User: <a asp-action="Profile" asp-controller="User" asp-route-Name="@comment.UserName">@comment.UserName</a></h6>
+            </div>
+            <div class="col">
+                @comment.CreatedAt
+            </div>
+        </div>
+        <div>
+            @comment.Text
+        </div>
+        <hr />
+    }
+</div>
+

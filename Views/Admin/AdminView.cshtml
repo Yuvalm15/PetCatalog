@@ -1,0 +1,35 @@
+﻿@model IEnumerable<PetShopProject.Models.Animal>
+<div class="myText">
+
+    <div class="page-header">
+        <h1>Admin</h1>
+    </div>
+    <hr />
+
+    <div class="btn-create">
+        <a asp-action="CreateAnimal" class="btn btn-success">Create New Animal</a>
+    </div>
+
+    <div class="container">
+        <div class="row row-params">
+            <div class="col">Pic</div>
+            <div class="col">Name</div>
+            <div class="col">Description</div>
+            <div class="col">Age</div>
+            <div class="col">Actions</div>
+        </div>
+        <br />
+        @foreach (var animal in Model)
+        {
+            <div class="row myStripedView">
+                <div class="col"><img src="/Assets/AnimalPictures/@animal.ImagePath" width="100" /></div>
+                <div class="col"><a asp-controller="Home" asp-action="ShowAnimal" asp-route-id=@animal.Id>@animal.Name</a></div>
+                <div class="col">@animal.Description</div>
+                <div class="col">@animal.Age</div>
+                <div class="col"><a asp-action="EditAnimal" asp-route-id=@animal.Id class="btn btn-warning">Edit</a> <a asp-action="DeleteAnimal" asp-route-id="@animal.Id" class="btn btn-danger">Delete</a></div>
+            </div>
+        }
+
+    </div>
+</div>
+
